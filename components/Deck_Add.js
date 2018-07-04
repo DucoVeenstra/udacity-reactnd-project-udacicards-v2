@@ -27,11 +27,8 @@ class DeckAdd extends Component {
     deckTitleInput: ''
   }
 
-  handleChange = (event) => {
-    this.setState({deckTitleInput: event.target.value});
-  }
-
   handleOnPressSubmit = () => {
+    // TODO Check if null
     const key = this.state.deckTitleInput;
     const deck = {
       title: this.state.deckTitleInput,
@@ -46,7 +43,8 @@ class DeckAdd extends Component {
       [key]: deck
     }));
 
-    // Navigate to Home
+    // Routing
+    // Pressing the button correctly creates the deck and routes the user to the Individual Deck view for the new deck.
 
     // Update database
     submitDeck({key, deck});
@@ -64,7 +62,7 @@ class DeckAdd extends Component {
           value={this.state.deckTitleInput} />
         <TextButton
           onPress={this.handleOnPressSubmit}>
-            Submit
+            Create Deck
         </TextButton>
       </View>
     );

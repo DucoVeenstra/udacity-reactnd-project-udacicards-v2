@@ -10,6 +10,7 @@ import { receiveDecks } from '../actions'
 import {DECKS_STORAGE_KEY} from '../utils/helpers';
 
 
+
 class DeckList extends Component {
   componentDidMount() {
     const { dispatch } = this.props;
@@ -20,13 +21,12 @@ class DeckList extends Component {
   }
   
   render() {
-    console.log('new');
     return(
       <ScrollView>
         {Object.keys(this.props.decks).map((key) => {
           const {title, ...rest} = this.props.decks[key];
           return (
-            <DeckListItem key={key} title={title} />
+            <DeckListItem key={key} title={title} cards={this.props.decks[key].questions} />
           )
         })}
       </ScrollView>

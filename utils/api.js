@@ -32,27 +32,11 @@ export function starterData() {
 }
 
 export function fetchDecks() {
-  console.log('fetchDecks 22');
   return AsyncStorage.getItem(DECKS_STORAGE_KEY).then((results) => {
-    //debugger;
-    console.log('ghf',results);
     return results === null ? starterData() : JSON.parse(results);
   }).catch((error) => {
     console.warn('Error while getting decks!', error)
   });
-
-  console.log('show', data);
-
-  //return AsyncStorage.getItem(DECKS_STORAGE_KEY)
-  //.then((results) => { return results });
-  // return AsyncStorage.getItem(DECKS_STORAGE_KEY)
-  //   .then((results) => {
-  //     console.log('ghf',results);
-  //     return results === null ? starterData() : JSON.parse(results)
-  //   })
-  //   .catch((error) => {
-  //     console.warn('Error while getting decks!', error)
-  //   })
 }
 
 export function submitDeck ({ key, deck }) {
@@ -71,32 +55,20 @@ export function removeDeck (key) {
     })
 }
 
+export function addCardToDeck({ card, deckTitle }) {
+	return AsyncStorage.getItem(STORAGE_KEY, (err, result) => {
+		let decks = JSON.parse(result)
 
+		let newQuestions = JSON.parse(
+			JSON.stringify(decks[deckTitle].questions)
+		)
+		newQuestions[newQuestions.length] = card
 
-
-// import React, {Component} from 'react';
-// import { View, Text, ScrollView  } from 'react-native';
-
-// import { getCardDecks } from '../utils/helpers';
-// import DeckListItem from './Deck_ListItem';
-
-
-
-// export default class DeckList extends Component {
-//   render() {
-//     const metaInfo = getCardDecks();
-
-//     return(
-//       <ScrollView>
-//         {Object.keys(metaInfo).map((key) => {
-//           const {title, ...rest} = metaInfo[key];
-//           return (
-//             <DeckListItem key={key} title={title} />
-//           )
-//         })}
-//       </ScrollView>
-//     );
-//   }
-// }
+		const value = JSON.stringify({
+			[deckTitle]: { title: deckTitle, questions: newQuestions },
+		})
+		AsyncStorage.mergeItem(STORAGE_KEY, value)
+	})
+}
 
 // https://github.com/gsal0115/MobileFlashcards/blob/master/components/DeckList.js
