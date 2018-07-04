@@ -23,6 +23,11 @@ const styles = StyleSheet.create({
 
 
 class DeckAdd extends Component {
+  static navigationOptions = {
+    title: 'Add New Deck',
+    
+  };
+
   state = {
     deckTitleInput: ''
   }

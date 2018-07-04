@@ -12,6 +12,10 @@ import {DECKS_STORAGE_KEY} from '../utils/helpers';
 
 
 class DeckList extends Component {
+  static navigationOptions = {
+    title: 'DECKS'
+  };
+  
   componentDidMount() {
     const { dispatch } = this.props;
     

@@ -14,7 +14,7 @@ function DeckListItem ({title, cards}) {
     <View>
       <Text>{title}</Text>
       <Text>{cards.length} cards</Text>
-      <AddCard title={title} cards={cards}/>
+      {/* <AddCard title={title} cards={cards}/> */}
     </View>
   );
 }
