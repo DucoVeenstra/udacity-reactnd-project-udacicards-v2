@@ -55,20 +55,28 @@ export function removeDeck (key) {
     })
 }
 
-export function addCardToDeck({ card, deckTitle }) {
-	return AsyncStorage.getItem(STORAGE_KEY, (err, result) => {
+export async function fetchSingleDeck (deckTitle) {
+  let result = await AsyncStorage.getItem(DECKS_STORAGE_KEY, (err, result) => {
+     return JSON.parse(result);
+  });
+
+  return Object.assign({}, {questions: JSON.parse(result)[deckTitle].questions});
+}
+
+export function updateDeck(deckTitle, deckObject) {
+	return AsyncStorage.getItem(DECKS_STORAGE_KEY, (err, result) => {
 		let decks = JSON.parse(result)
+		// let newQuestions = JSON.parse(
+		// 	JSON.stringify(decks[deckTitle].questions)
+		// )
+		// newQuestions[newQuestions.length] = card
 
-		let newQuestions = JSON.parse(
-			JSON.stringify(decks[deckTitle].questions)
-		)
-		newQuestions[newQuestions.length] = card
-
-		const value = JSON.stringify({
-			[deckTitle]: { title: deckTitle, questions: newQuestions },
-		})
-		AsyncStorage.mergeItem(STORAGE_KEY, value)
+		// const value = JSON.stringify({
+		// 	[deckTitle]: { title: deckTitle, updatedQuestions },
+		// })
+    //AsyncStorage.mergeItem(DECKS_STORAGE_KEY, value)
+    
+    AsyncStorage.mergeItem(DECKS_STORAGE_KEY, {[deckTitle]: deckObject})
 	})
 }
 
-// https://github.com/gsal0115/MobileFlashcards/blob/master/components/DeckList.js

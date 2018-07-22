@@ -1,73 +1,67 @@
 import React, {Component} from 'react';
-import { StyleSheet, View, Text, TextInput, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, Text, TextInput } from 'react-native';
 
 import {submitDeck} from '../utils/api';
 import TextButton from './TextButton';
 
 import { connect } from 'react-redux';
-import { addDeck} from '../actions';
-
-const styles = StyleSheet.create({
-  text: {
-    fontSize: 30,
-  },
-  input: {
-    fontSize: 20,
-    height: 40,
-    borderColor: 'gray',
-    borderWidth: 1,
-    borderRadius: 5,
-    padding: 5
-  }
-});
-
+import { addDeck } from '../actions';
 
 class DeckAdd extends Component {
   static navigationOptions = {
     title: 'Add New Deck',
-    
   };
 
   state = {
-    deckTitleInput: ''
+    deckTitleInput: '',
+    error: false
   }
 
   handleOnPressSubmit = () => {
-    // TODO Check if null
     const key = this.state.deckTitleInput;
     const deck = {
       title: this.state.deckTitleInput,
       questions: []
     };
 
-    // TEMP
-    //this.setState({deckTitleInput: 'Do Something'});
+    if (this.state.deckTitleInput != 0) {
+      // Update state (Dispatch)
+      this.props.dispatch(addDeck({
+        [key]: deck
+      }));
 
-    // Update state (Dispatch)
-    this.props.dispatch(addDeck({
-      [key]: deck
-    }));
+      // Routing
+      // Pressing the button correctly creates the deck and routes the user to the Individual Deck view for the new deck.
 
-    // Routing
-    // Pressing the button correctly creates the deck and routes the user to the Individual Deck view for the new deck.
+      // Update database
+      submitDeck({key, deck});
 
-    // Update database
-    submitDeck({key, deck});
+      this.setState({deckTitleInput: '', error: false});
+      this.props.navigation.goBack(null)
 
-    // Clear local nofication
+      // Clear local nofication
+    } else {
+      this.setState({error:true});
+    }
+  }
+
+  changeBorderColor = () => {
+    return this.state.error ? {borderColor: '#e60000'} : {}
   }
 
   render() {
     return(
-      <View>
-        <Text style={styles.text}>What is the title of your new deck?</Text>
+      <View style={styles.container}>
+        <Text style={styles.textTitle}>{"What is the title\n of your new\ndeck?"}</Text>
         <TextInput 
-          style={styles.input} placeholder={"Deck Title"}
+          style={[styles.input, this.changeBorderColor()]} placeholder={"Deck Title"}
           onChangeText={(deckTitleInput) => this.setState({deckTitleInput})}
           value={this.state.deckTitleInput} />
         <TextButton
-          onPress={this.handleOnPressSubmit}>
-            Create Deck
+          onPress={this.handleOnPressSubmit}
+          color={'#000'}
+          style={styles.buttonPostion}>
+          <Text>Create Deck</Text>
         </TextButton>
       </View>
     );
@@ -75,3 +69,28 @@ class DeckAdd extends Component {
 }
 
 export default connect(null)(DeckAdd);
+
+const styles = StyleSheet.create({
+  container: {
+    backgroundColor: '#fff',
+    justifyContent: 'flex-start',
+    padding: 10,
+    alignItems: 'center',
+    height: '100%'
+  },
+  textTitle: {
+    fontSize: 25,
+    textAlign: 'center',
+    paddingBottom: 30
+  },
+  input: {
+    fontSize: 20,
+    height: 40,
+    borderColor: 'gray',
+    borderWidth: 1,
+    borderRadius: 5,
+    padding: 5,
+    width: '100%',
+    marginBottom: 40
+  }
+});

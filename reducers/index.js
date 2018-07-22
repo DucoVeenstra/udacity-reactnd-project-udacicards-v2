@@ -1,4 +1,4 @@
-import { ADD_DECK, RECEIVE_DECKS } from '../actions';
+import { ADD_DECK, RECEIVE_DECKS, UPDATE_DECK, RECEIVE_QUESTIONS } from '../actions';
 
 function decks (state = {}, action) {
   switch (action.type) {
@@ -8,13 +8,18 @@ function decks (state = {}, action) {
         ...action.decks
       }
     case ADD_DECK:
-      console.log('reducer addDeck', {
-        ...state,
-        ...action.deck
-      });
       return {
         ...state,
         ...action.deck
+      }
+    case UPDATE_DECK:
+      return {
+        ...state,
+        ...action.deck
+      }
+    case RECEIVE_QUESTIONS:  
+    return {
+        ...action.questions
       }
     default:
       return state

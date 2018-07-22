@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
-import { View, Text, ScrollView, AsyncStorage  } from 'react-native';
+import { View, TouchableOpacity, ScrollView, AsyncStorage, StyleSheet  } from 'react-native';
 import { connect } from 'react-redux'
+import { FontAwesome, Entypo } from '@expo/vector-icons'
 
 import { getCardDecks } from '../utils/helpers';
 import DeckListItem from './Deck_ListItem';
@@ -12,8 +13,8 @@ import {DECKS_STORAGE_KEY} from '../utils/helpers';
 
 
 class DeckList extends Component {
-  static navigationOptions = {
-    title: 'DECKS'
+  static navigationOptions = {  
+    title: 'DECKS'     
   };
   
   componentDidMount() {
@@ -23,17 +24,26 @@ class DeckList extends Component {
       dispatch(receiveDecks(decks));
     });
   }
+
+  navigateToDeck = (deck) => {
+    this.props.navigation.navigate('DeckView', {title: deck.title, cards: deck.cards})
+  }
   
   render() {
+    console.log('udpate')
     return(
-      <ScrollView>
-        {Object.keys(this.props.decks).map((key) => {
-          const {title, ...rest} = this.props.decks[key];
-          return (
-            <DeckListItem key={key} title={title} cards={this.props.decks[key].questions} />
-          )
-        })}
-      </ScrollView>
+      <View style={styles.container}>
+        <ScrollView>
+          {Object.keys(this.props.decks).map((key) => {
+            const {title, ...rest} = this.props.decks[key];
+            return (
+              <View key={key} >
+                <DeckListItem title={title} cards={this.props.decks[key].questions} navigate={this.navigateToDeck} />
+              </View>
+            )
+          })}
+        </ScrollView>
+      </View>
     );
   }
 }
@@ -45,3 +55,10 @@ function mapStateToProps(state, ownProps) {
 }
 
 export default connect(mapStateToProps)(DeckList)
+
+const styles = StyleSheet.create({
+  container: {
+    backgroundColor: '#fff',
+    justifyContent: 'flex-start'
+  },
+});
