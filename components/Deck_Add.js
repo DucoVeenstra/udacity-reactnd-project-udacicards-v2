@@ -30,16 +30,15 @@ class DeckAdd extends Component {
         [key]: deck
       }));
 
-      // Routing
-      // Pressing the button correctly creates the deck and routes the user to the Individual Deck view for the new deck.
-
       // Update database
       submitDeck({key, deck});
 
       this.setState({deckTitleInput: '', error: false});
+
+      // Routing
+      // Pressing the button correctly creates the deck and routes the user to the Individual Deck view for the new deck.
       this.props.navigation.goBack(null)
 
-      // Clear local nofication
     } else {
       this.setState({error:true});
     }

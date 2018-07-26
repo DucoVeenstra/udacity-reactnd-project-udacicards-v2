@@ -1,16 +1,10 @@
 import React, {Component} from 'react';
-import { View, TouchableOpacity, ScrollView, AsyncStorage, StyleSheet  } from 'react-native';
-import { connect } from 'react-redux'
-import { FontAwesome, Entypo } from '@expo/vector-icons'
+import { View, ScrollView, StyleSheet  } from 'react-native';
+import { connect } from 'react-redux';
 
-import { getCardDecks } from '../utils/helpers';
 import DeckListItem from './Deck_ListItem';
 import { fetchDecks } from '../utils/api';
-import { receiveDecks } from '../actions'
-
-import {DECKS_STORAGE_KEY} from '../utils/helpers';
-
-
+import { receiveDecks } from '../actions';
 
 class DeckList extends Component {
   static navigationOptions = {  
@@ -30,7 +24,6 @@ class DeckList extends Component {
   }
   
   render() {
-    console.log('udpate')
     return(
       <View style={styles.container}>
         <ScrollView>

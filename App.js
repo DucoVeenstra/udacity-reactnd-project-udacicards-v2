@@ -1,9 +1,7 @@
 import React, {Component} from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
-import { createStackNavigator, createBottomTabNavigator, navigationOptions } from 'react-navigation';
-import { FontAwesome, Entypo } from '@expo/vector-icons'
+import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
 
 import {blue, gray, black} from './utils/colors';
 import reducer from './reducers';
@@ -12,6 +10,7 @@ import DeckView from './components/Deck_View';
 import DeckAdd from './components/Deck_Add';
 import CardAdd from './components/Card_Add';
 import Quiz from './components/Quiz_View';
+import { setLocalNotification } from './utils/helpers';
 
 const Tabs = createBottomTabNavigator(
   {
@@ -49,27 +48,13 @@ const RootStack = createStackNavigator(
         backgroundColor: blue,
       },
       title: 'Quiz Cards',
-      
-    // headerRight: 
-    // <TouchableOpacity onPress={Quiz}>
-    //   <FontAwesome name='cog' size={25} color={'#fff'} style={{marginRight: 10}}/>
-    // </TouchableOpacity>
-    
-    
     }
   }
 );
 
 export default class App extends Component {
-  
-  createDeck = () => {
-    // Update Redux
-
-    // Navigate to home
-
-    // Save to 'DB'
-
-    // Clear local notification
+  componentDidMount () {
+    setLocalNotification();
   }
 
   render() {

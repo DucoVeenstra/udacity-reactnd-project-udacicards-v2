@@ -1,26 +1,20 @@
 import React, {Component} from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux'
-// The deck title
-// Number of cards in the deck
-// Option to start a quiz for that deck
-// Option to add a new question to the deck
-
-//function DeckListItem ({title, cards, navigate}) {
-
-
 
 class DeckListItem extends Component {
-  render() {
-    //const { navigation } = this.props;
-    //const titleDeck = navigation.getParam('title', 'deckTitle');
-
-    //console.log(this.props.decks)
+  onListItemPress = () => {
     var {title, cards} = this.props
+    this.props.navigate({title: title, cards: cards})
+  }
+  
+  render() {
+    var {title, cards} = this.props
+    
     return(
       <View style={styles.container}>
         <TouchableOpacity onPress={() =>
-          this.props.navigate({title: title, cards: cards})}>
+          this.onListItemPress()}>
           <Text style={styles.textTitle} >{title}</Text>
           <Text style={styles.textSubTitle}>{cards.length} cards</Text>
         </TouchableOpacity>

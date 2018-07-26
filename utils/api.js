@@ -79,4 +79,3 @@ export function updateDeck(deckTitle, deckObject) {
     AsyncStorage.mergeItem(DECKS_STORAGE_KEY, {[deckTitle]: deckObject})
 	})
 }
-

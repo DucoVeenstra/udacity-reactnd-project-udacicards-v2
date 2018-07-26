@@ -6,10 +6,6 @@ import TextButton from './TextButton';
 
 class DeckView extends Component {
   
-  static navigationOptions = ({ navigation }) => ({
-    title: `Deck: ${navigation.state.params.title}`
-  });
-
   startQuiz = (title) => {
     this.props.navigation.navigate('Quiz', {deckTitle: title})
   }
