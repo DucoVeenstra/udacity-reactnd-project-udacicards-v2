@@ -32,14 +32,14 @@ class Quiz extends Component {
     return  false;
   }
 
-  aswerWasCorrect = () => {
+  answerWasCorrect = () => {
     this.setState({correct: this.state.correct === 0 ? 1 : 1 + this.state.correct});
     if(this.increment()) {
       this.setState({questionsIndex: this.state.questionsIndex + 1});
     }
   }
 
-  aswerWasIncorrect = () => {
+  answerWasIncorrect = () => {
     if(this.increment()) {
       this.setState({questionsIndex: this.state.questionsIndex + 1});
     }    
@@ -59,12 +59,12 @@ class Quiz extends Component {
           <Text style={styles.textQuestion}>{this.props.decks[titleDeck].questions[this.state.questionsIndex].question}</Text>
           <Text style={styles.textAnswer} onPress={() => {this.setState({showAnswer: true})}}>Answer</Text>
           <View style={{marginTop: 60}}>
-            <TextButton  color={green} onPress={() => this.aswerWasCorrect()}>
+            <TextButton  color={green} onPress={() => this.answerWasCorrect()}>
               <Text>Correct</Text>
             </TextButton>
           </View>
           <View style={{marginTop: 10}}>
-            <TextButton color={red} onPress={() => this.aswerWasIncorrect()}>
+            <TextButton color={red} onPress={() => this.answerWasIncorrect()}>
               <Text>Incorrect</Text>
             </TextButton>
           </View>
