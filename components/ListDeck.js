@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import { View, ScrollView, StyleSheet  } from 'react-native';
 import { connect } from 'react-redux';
 
-import DeckListItem from './Deck_ListItem';
+import DeckListItem from './ListItemDeck';
 import { fetchDecks } from '../utils/api';
 import { receiveDecks } from '../actions';
 

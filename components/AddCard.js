@@ -34,7 +34,6 @@ class CardAdd extends Component {
   handleOnPressSubmit = () => {
     const { navigation } = this.props;
     const titleDeck = navigation.getParam('deckTitle', 'deckTitle');
-    const cards = navigation.getParam('deckCards', 'deckCards');
 
     if (this.inputValidation) {
       const card = { 
@@ -44,7 +43,7 @@ class CardAdd extends Component {
       const key = titleDeck;
       const deck = {
         title: titleDeck,
-        questions: cards.concat([card])
+        questions: this.props.decks[titleDeck].questions.concat([card])
       };
 
       // Update state (Dispatch)

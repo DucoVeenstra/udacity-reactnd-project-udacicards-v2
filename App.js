@@ -5,11 +5,11 @@ import { createStackNavigator, createBottomTabNavigator } from 'react-navigation
 
 import {blue, gray, black} from './utils/colors';
 import reducer from './reducers';
-import DeckList from './components/Deck_List';
-import DeckView from './components/Deck_View';
-import DeckAdd from './components/Deck_Add';
-import CardAdd from './components/Card_Add';
-import Quiz from './components/Quiz_View';
+import DeckList from './components/ListDeck';
+import DeckView from './components/ViewDeck';
+import DeckAdd from './components/AddDeck';
+import CardAdd from './components/AddCard';
+import Quiz from './components/ViewQuiz';
 import { setLocalNotification } from './utils/helpers';
 
 const Tabs = createBottomTabNavigator(

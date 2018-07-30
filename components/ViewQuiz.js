@@ -101,8 +101,8 @@ class Quiz extends Component {
       <View style={styles.container}>
         <Text style={styles.textQuestion}>{`You complete this quiz with ${this.state.correct} correct ${this.state.correct > 1 ? "answers" : "answer"} out of ${this.props.decks[titleDeck].questions.length} questions.`}</Text>
         <View style={{marginTop: 60}}>
-          <TextButton  color={gray} onPress={() => this.props.navigation.navigate('Home')}>
-            <Text>Back to Decks</Text>
+          <TextButton  color={gray} onPress={() => this.props.navigation.navigate('DeckView', {title: titleDeck, cards: this.props.decks[titleDeck].questions})}>
+            <Text>Back to Deck</Text>
           </TextButton>
         </View>
         <View style={{marginTop: 10}}>
