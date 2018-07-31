@@ -20,7 +20,7 @@ class CardAdd extends Component {
   }
 
   inputValidation = () => {
-    let error = false; 
+    let error = false;
     if (this.state.deckQuestionInput.length === 0) {
       error = true;
     }
@@ -35,7 +35,7 @@ class CardAdd extends Component {
     const { navigation } = this.props;
     const titleDeck = navigation.getParam('deckTitle', 'deckTitle');
 
-    if (this.inputValidation) {
+    if (!this.inputValidation()) {
       const card = { 
         question: this.state.deckQuestionInput, 
         answer: this.state.deckAnswerInput }
@@ -55,10 +55,8 @@ class CardAdd extends Component {
       // Pressing the button correctly creates the deck and routes the user to the Individual Deck view for the new deck.
 
       // Update database
-      //console.log('addCardToDeck', card, this.props.title);
       submitDeck({key, deck});
 
-      // Clear local nofication
         // Reset state
         this.setState({
           deckQuestionInput: '',

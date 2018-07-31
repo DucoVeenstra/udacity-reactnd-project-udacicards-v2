@@ -37,7 +37,7 @@ class DeckAdd extends Component {
 
       // Routing
       // Pressing the button correctly creates the deck and routes the user to the Individual Deck view for the new deck.
-      this.props.navigation.goBack(null)
+      this.props.navigation.navigate('DeckView', {title: key, cards: []})
 
     } else {
       this.setState({error:true});

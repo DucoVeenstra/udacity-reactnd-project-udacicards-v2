@@ -65,17 +65,6 @@ export async function fetchSingleDeck (deckTitle) {
 
 export function updateDeck(deckTitle, deckObject) {
 	return AsyncStorage.getItem(DECKS_STORAGE_KEY, (err, result) => {
-		let decks = JSON.parse(result)
-		// let newQuestions = JSON.parse(
-		// 	JSON.stringify(decks[deckTitle].questions)
-		// )
-		// newQuestions[newQuestions.length] = card
-
-		// const value = JSON.stringify({
-		// 	[deckTitle]: { title: deckTitle, updatedQuestions },
-		// })
-    //AsyncStorage.mergeItem(DECKS_STORAGE_KEY, value)
-    
     AsyncStorage.mergeItem(DECKS_STORAGE_KEY, {[deckTitle]: deckObject})
 	})
 }
